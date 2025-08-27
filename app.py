@@ -55,13 +55,18 @@ if uploaded_file is not None:
     splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=200)
     docs = splitter.split_text(text)
 
+    client_settings = {
+        "chroma_db_impl": "duckdb+parquet",
+        "persist_directory": None
+    }
+
     embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
     st.session_state["db"] = Chroma.from_texts(
         docs,
         embedding=embeddings,
         collection_name=f"session_{uuid.uuid4().hex}",
         persist_directory=None,  # in-memory DB, not saved to disk
-        client_settings={"chroma_db_impl": "duckdb+parquet","persist_directory": None}
+        client_settings= client_settings
     )
 
     st.write("✅ Vector store created")
@@ -119,6 +124,7 @@ for msg in st.session_state.get("messages", [])[1:]:
 
 # Question input at the bottom like ChatGPT
 st.text_input("Ask a question about the document:", key="query_input", on_change=ask_question)
+
 
 
 
