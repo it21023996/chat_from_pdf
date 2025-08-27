@@ -60,7 +60,7 @@ if uploaded_file is not None:
         docs,
         embedding=embeddings,
         collection_name=f"session_{uuid.uuid4().hex}",
-        persist_directory=None  # in-memory DB, not saved to disk
+        persist_directory=None,  # in-memory DB, not saved to disk
         client_settings={"chroma_db_impl": "duckdb+parquet"}
     )
 
@@ -119,5 +119,6 @@ for msg in st.session_state.get("messages", [])[1:]:
 
 # Question input at the bottom like ChatGPT
 st.text_input("Ask a question about the document:", key="query_input", on_change=ask_question)
+
 
 
