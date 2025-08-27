@@ -1,19 +1,14 @@
 streamlit==1.48.1
-rich==14.1.0
 PyPDF2==3.0.1
-
-# LangChain ecosystem
+rich==14.1.0
 langchain==0.3.27
 langchain-community==0.3.27
+langchain-huggingface>=0.0.4  
 chromadb==1.0.20
-
-# Embeddings + HuggingFace
-sentence-transformers==2.2.2
+sentence-transformers>=2.6.0
 transformers==4.55.4
-torch==2.8.0
+torch>=2.0.0,<3.0.0
 huggingface-hub==0.34.4
-
-# Utils
 python-dotenv==1.1.1
 groq==0.31.0
 tqdm==4.67.1
